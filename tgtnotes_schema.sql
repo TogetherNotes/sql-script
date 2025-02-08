@@ -99,27 +99,13 @@ CREATE TABLE messages (
 	CONSTRAINT fk_messages_chat FOREIGN KEY(chat_id) REFERENCES chats (id)
 );
 
-CREATE TABLE contracts (
-	id INT IDENTITY(1,1),
-	artist_id INT,
-	space_id INT,
-	init_hour TIME,
-	end_hour TIME,
-	CONSTRAINT pk_contracts PRIMARY KEY (id),
-	CONSTRAINT uq_contract UNIQUE (artist_id, space_id)
-	CONSTRAINT fk_contracts_artist FOREIGN KEY(artist_id) REFERENCES app (id),
-	CONSTRAINT fk_contracts_space FOREIGN KEY(space_id) REFERENCES app (id)
-);
-
 CREATE TABLE rating (
 	id INT IDENTITY(1,1) PRIMARY KEY,
 	rating INT CHECK (rating BETWEEN 1 AND 5),
 	artist_id INT NULL,
 	space_id INT NULL,
-	contract_id INT NULL,
-	CONSTRAINT fk_rating_app FOREIGN KEY(artist_id) REFERENCES app(id),
-	CONSTRAINT fk_rating_space FOREIGN KEY(space_id) REFERENCES app(id),
-	CONSTRAINT fk_rating_contract FOREIGN KEY(contract_id) REFERENCES contracts(id)
+	CONSTRAINT fk_rating_artist FOREIGN KEY(artist_id) REFERENCES app (id),
+	CONSTRAINT fk_rating_space FOREIGN KEY(space_id) REFERENCES app (id)
 );
 
 CREATE TABLE spaces (
@@ -141,9 +127,19 @@ CREATE TABLE artists (
 CREATE TABLE matches (
 	artist_id INT,
 	space_id INT,
-	CONSTRAINT pk_match PRIMARY KEY (artist_id, space_id),
-	CONSTRAINT fk_match_artist FOREIGN KEY(artist_id) REFERENCES app (id),
-	CONSTRAINT fk_match_space FOREIGN KEY(space_id) REFERENCES app (id)
+	CONSTRAINT pk_matches PRIMARY KEY (artist_id, space_id),
+	CONSTRAINT fk_matches_artist FOREIGN KEY(artist_id) REFERENCES app (id),
+	CONSTRAINT fk_matches_space FOREIGN KEY(space_id) REFERENCES app (id)
+);
+
+CREATE TABLE contracts (
+	artist_id INT,
+	space_id INT,
+	init_hour TIME,
+	end_hour TIME,
+	CONSTRAINT pk_contracts PRIMARY KEY (artist_id, space_id, init_hour, end_hour),
+	CONSTRAINT fk_contracts_artist FOREIGN KEY(artist_id) REFERENCES app (id),
+	CONSTRAINT fk_contracts_space FOREIGN KEY(space_id) REFERENCES app (id)
 );
 
 CREATE TABLE incidences (
