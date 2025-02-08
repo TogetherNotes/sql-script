@@ -112,14 +112,14 @@ CREATE TABLE contracts (
 );
 
 CREATE TABLE rating (
-    id INT IDENTITY(1,1) PRIMARY KEY,
+	id INT IDENTITY(1,1) PRIMARY KEY,
 	rating INT CHECK (rating BETWEEN 1 AND 5),
-    artist_id INT NULL,
-    space_id INT NULL,
-    contract_id INT NULL,
-    CONSTRAINT fk_rating_app FOREIGN KEY(artist_id) REFERENCES app(id),
-    CONSTRAINT fk_rating_space FOREIGN KEY(space_id) REFERENCES app(id),
-    CONSTRAINT fk_rating_contract FOREIGN KEY(contract_id) REFERENCES contracts(id)
+	artist_id INT NULL,
+	space_id INT NULL,
+	contract_id INT NULL,
+	CONSTRAINT fk_rating_app FOREIGN KEY(artist_id) REFERENCES app(id),
+	CONSTRAINT fk_rating_space FOREIGN KEY(space_id) REFERENCES app(id),
+	CONSTRAINT fk_rating_contract FOREIGN KEY(contract_id) REFERENCES contracts(id)
 );
 
 CREATE TABLE spaces (
