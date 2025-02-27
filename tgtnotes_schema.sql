@@ -64,7 +64,7 @@ CREATE TABLE app (
 	name NVARCHAR(60),
 	mail NVARCHAR(255),
 	password NVARCHAR(255),
-	role_id INT,
+	role NVARCHAR(60),
 	rating INT CHECK (rating BETWEEN 1 AND 5),
 	latitude DECIMAL(10,8),
 	longitude DECIMAL(11,8),
