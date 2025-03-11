@@ -135,8 +135,8 @@ CREATE TABLE matches (
 CREATE TABLE contracts (
 	artist_id INT,
 	space_id INT,
-	init_hour TIME,
-	end_hour TIME,
+	init_hour DATETIMEOFFSET,
+	end_hour DATETIMEOFFSET,
 	CONSTRAINT pk_contracts PRIMARY KEY (artist_id, space_id, init_hour, end_hour),
 	CONSTRAINT fk_contracts_artist FOREIGN KEY(artist_id) REFERENCES app (id),
 	CONSTRAINT fk_contracts_space FOREIGN KEY(space_id) REFERENCES app (id)
