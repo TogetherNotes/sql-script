@@ -119,7 +119,7 @@ CREATE TABLE spaces (
 CREATE TABLE artists (
 	app_user_id INT,
 	genre_id INT,
-	CONSTRAINT pk_artists PRIMARY KEY (app_user_id, genre_id),
+	CONSTRAINT pk_artists PRIMARY KEY (app_user_id),
 	CONSTRAINT fk_artists_app FOREIGN KEY(app_user_id) REFERENCES app (id),
 	CONSTRAINT fk_artists_genre FOREIGN KEY(genre_id) REFERENCES genres (id)
 );
