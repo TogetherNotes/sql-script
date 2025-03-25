@@ -132,10 +132,23 @@ CREATE TABLE matches (
 	CONSTRAINT fk_matches_space FOREIGN KEY(space_id) REFERENCES app (id)
 );
 
+CREATE TABLE temp_match (
+    artist_id INT,
+    space_id INT,
+    artist_like BIT DEFAULT 0,
+    space_like BIT DEFAULT 0,
+    status NVARCHAR(20) CHECK (status IN ('pending', 'accepted', 'rejected')) DEFAULT 'pending',
+    request_date DATETIME DEFAULT GETDATE(),
+    CONSTRAINT pk_temp_match PRIMARY KEY (artist_id, space_id),
+    CONSTRAINT fk_temp_match_artist FOREIGN KEY(artist_id) REFERENCES app(id),
+    CONSTRAINT fk_temp_match_space FOREIGN KEY(space_id) REFERENCES app(id)
+);
+
 CREATE TABLE contracts (
 	artist_id INT,
 	space_id INT,
 	meet_type NVARCHAR(20) CHECK (meet_type IN ('meeting', 'work')),
+	staus NVARCHAR(20) CHECK (meet_type IN ('todo', 'finished')),
 	init_hour DATETIMEOFFSET,
 	end_hour DATETIMEOFFSET,
 	CONSTRAINT pk_contracts PRIMARY KEY (artist_id, space_id, init_hour, end_hour),
