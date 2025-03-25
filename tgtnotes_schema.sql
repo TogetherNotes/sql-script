@@ -148,7 +148,7 @@ CREATE TABLE contracts (
 	artist_id INT,
 	space_id INT,
 	meet_type NVARCHAR(20) CHECK (meet_type IN ('meeting', 'work')),
-	staus NVARCHAR(20) CHECK (meet_type IN ('todo', 'finished')),
+	status NVARCHAR(20) CHECK (meet_type IN ('todo', 'finished')),
 	init_hour DATETIMEOFFSET,
 	end_hour DATETIMEOFFSET,
 	CONSTRAINT pk_contracts PRIMARY KEY (artist_id, space_id, init_hour, end_hour),
