@@ -127,6 +127,7 @@ CREATE TABLE artists (
 CREATE TABLE matches (
 	artist_id INT,
 	space_id INT,
+	match_date DATE,
 	CONSTRAINT pk_matches PRIMARY KEY (artist_id, space_id),
 	CONSTRAINT fk_matches_artist FOREIGN KEY(artist_id) REFERENCES app (id),
 	CONSTRAINT fk_matches_space FOREIGN KEY(space_id) REFERENCES app (id)
