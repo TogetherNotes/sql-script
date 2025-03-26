@@ -113,13 +113,13 @@ CREATE TABLE spaces (
 	capacity INT,
 	zip_code NVARCHAR(10),
 	CONSTRAINT pk_spaces PRIMARY KEY (app_user_id),
-	CONSTRAINT fk_spaces_app FOREIGN KEY(app_user_id) REFERENCES app (id)
+	CONSTRAINT fk_spaces_app FOREIGN KEY(app_user_id) REFERENCES app (id) ON DELETE CASCADE
 );
 
 CREATE TABLE artists (
 	app_user_id INT,
 	CONSTRAINT pk_artists PRIMARY KEY (app_user_id),
-	CONSTRAINT fk_artists_app FOREIGN KEY(app_user_id) REFERENCES app (id),
+	CONSTRAINT fk_artists_app FOREIGN KEY(app_user_id) REFERENCES app (id) ON DELETE CASCADE
 );
 
 CREATE TABLE artist_genres (
