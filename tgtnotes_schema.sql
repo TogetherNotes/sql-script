@@ -118,10 +118,17 @@ CREATE TABLE spaces (
 
 CREATE TABLE artists (
 	app_user_id INT,
-	genre_id INT,
 	CONSTRAINT pk_artists PRIMARY KEY (app_user_id),
 	CONSTRAINT fk_artists_app FOREIGN KEY(app_user_id) REFERENCES app (id),
-	CONSTRAINT fk_artists_genre FOREIGN KEY(genre_id) REFERENCES genres (id)
+);
+
+CREATE TABLE artist_genres (
+	artist_id INT,
+	genre_id INT,
+	creation_date DATE,
+	CONSTRAINT pk_artist_genres PRIMARY KEY (artist_id, genre_id),
+	CONSTRAINT fk_artist FOREIGN KEY(artist_id) REFERENCES artists (app_user_id),
+	CONSTRAINT fk_genre FOREIGN KEY(genre_id) REFERENCES genres (id)
 );
 
 CREATE TABLE matches (
