@@ -65,13 +65,13 @@ CREATE TABLE app (
 	mail NVARCHAR(255),
 	password NVARCHAR(255),
 	role NVARCHAR(60),
-	rating INT CHECK (rating BETWEEN 1 AND 5),
-	latitude DECIMAL(10,8),
-	longitude DECIMAL(11,8),
+	rating INT CHECK (rating BETWEEN 1 AND 5) NULL,
+	latitude DECIMAL(10,8) NULL,
+	longitude DECIMAL(11,8) NULL,
 	active BIT,
-	language_id INT,
-	file_id INT,
-	notification_id INT,
+	language_id INT NULL,
+	file_id INT NULL,
+	notification_id INT NULL,
 	CONSTRAINT pk_app PRIMARY KEY (id),
 	CONSTRAINT fk_app_language FOREIGN KEY(language_id) REFERENCES languages (id),
 	CONSTRAINT fk_app_file FOREIGN KEY(file_id) REFERENCES files (id),
@@ -141,15 +141,15 @@ CREATE TABLE matches (
 );
 
 CREATE TABLE temp_match (
-    artist_id INT,
-    space_id INT,
-    artist_like BIT DEFAULT 0,
-    space_like BIT DEFAULT 0,
-    status NVARCHAR(20) CHECK (status IN ('pending', 'accepted', 'rejected')) DEFAULT 'pending',
-    request_date DATETIME DEFAULT GETDATE(),
-    CONSTRAINT pk_temp_match PRIMARY KEY (artist_id, space_id),
-    CONSTRAINT fk_temp_match_artist FOREIGN KEY(artist_id) REFERENCES app(id),
-    CONSTRAINT fk_temp_match_space FOREIGN KEY(space_id) REFERENCES app(id)
+	artist_id INT,
+	space_id INT,
+	artist_like BIT DEFAULT 0,
+	space_like BIT DEFAULT 0,
+	status NVARCHAR(20) CHECK (status IN ('pending', 'accepted', 'rejected')) DEFAULT 'pending',
+	request_date DATETIME DEFAULT GETDATE(),
+	CONSTRAINT pk_temp_match PRIMARY KEY (artist_id, space_id),
+	CONSTRAINT fk_temp_match_artist FOREIGN KEY(artist_id) REFERENCES app(id),
+	CONSTRAINT fk_temp_match_space FOREIGN KEY(space_id) REFERENCES app(id)
 );
 
 CREATE TABLE contracts (
