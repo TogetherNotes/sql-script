@@ -23,13 +23,6 @@ CREATE TABLE languages (
 	CONSTRAINT pk_languages PRIMARY KEY (id)
 );
 
-CREATE TABLE notifications (
-	id INT IDENTITY(1,1),
-	content NVARCHAR(60),
-	date DATE,
-	CONSTRAINT pk_notifications PRIMARY KEY (id)
-);
-
 CREATE TABLE admin (
 	id INT IDENTITY(1,1),
 	name NVARCHAR(60),
@@ -62,7 +55,6 @@ CREATE TABLE app (
 	longitude DECIMAL(11,8) NULL,
 	active BIT,
 	language_id INT NULL,
-	notification_id INT NULL,
 	CONSTRAINT pk_app PRIMARY KEY (id),
 	CONSTRAINT fk_app_language FOREIGN KEY(language_id) REFERENCES languages (id),
 	CONSTRAINT fk_app_notification FOREIGN KEY(notification_id) REFERENCES notifications (id)
@@ -74,8 +66,17 @@ CREATE TABLE files (
 	type NVARCHAR(20) CHECK (type IN ('image', 'video', 'audio', 'document')),
 	date DATE,
 	app_id INT,
-	CONSTRAINT pk_files PRIMARY KEY (id),
+	CONSTRAINT pk_files PRIMARY KEY (id, app_id),
 	CONSTRAINT fk_file_app FOREIGN KEY(app_id) REFERENCES app (id)
+);
+
+CREATE TABLE notifications (
+	id INT IDENTITY(1,1),
+	content NVARCHAR(60),
+	date DATE,
+	app_id INT,
+	CONSTRAINT pk_notifications PRIMARY KEY (id, app_id),
+	CONSTRAINT fk_notifications_app FOREIGN KEY(app_id) REFERENCES app (id)
 );
 
 CREATE TABLE chats (
