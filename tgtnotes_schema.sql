@@ -56,8 +56,7 @@ CREATE TABLE app (
 	active BIT,
 	language_id INT NULL,
 	CONSTRAINT pk_app PRIMARY KEY (id),
-	CONSTRAINT fk_app_language FOREIGN KEY(language_id) REFERENCES languages (id),
-	CONSTRAINT fk_app_notification FOREIGN KEY(notification_id) REFERENCES notifications (id)
+	CONSTRAINT fk_app_language FOREIGN KEY(language_id) REFERENCES languages (id)
 );
 
 CREATE TABLE files (
