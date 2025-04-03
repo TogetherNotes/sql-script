@@ -47,7 +47,7 @@ CREATE TABLE activity (
 CREATE TABLE app (
 	id INT IDENTITY(1,1),
 	name NVARCHAR(60),
-	mail NVARCHAR(255),
+	mail NVARCHAR(255) UNIQUE,
 	password NVARCHAR(255),
 	role NVARCHAR(60),
 	rating INT CHECK (rating BETWEEN 1 AND 5) NULL,
