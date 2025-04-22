@@ -155,6 +155,7 @@ CREATE TABLE temp_match (
 CREATE TABLE contracts (
 	artist_id INT,
 	space_id INT,
+	title NVARCHAR(255),
 	meet_type NVARCHAR(20) CHECK (meet_type IN ('meeting', 'work')),
 	status NVARCHAR(20) CHECK (status IN ('todo', 'finished')),
 	init_hour DATETIMEOFFSET,
